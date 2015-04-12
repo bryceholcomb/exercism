@@ -1,18 +1,15 @@
 var words = function (phrase) {
-  function emptyStrings(element) {
-    return element !== ""
-  }
+  return phrase.split(/\s+/).reduce(addToCount, {});
+};
 
-  var wordCount = {}
-  var splitPhrase = phrase.split(/\s/).filter(emptyStrings)
-  splitPhrase.forEach(function(phrase) {
-    if (!wordCount[phrase] || phrase === "toString") {
-      wordCount[phrase] = 1
-    } else {
-      wordCount[phrase]++
-    }
-  });
-  return wordCount
-}
+function addToCount(words, word) {
+  if (words.hasOwnProperty(word)) {
+    words[word]++;
+    return words;
+  } else {
+    words[word] = 1;
+    return words;
+  }
+};
 
 module.exports = words;
